@@ -9,7 +9,7 @@ import android.view.View;
  * @version 创建时间：2017/11/11
  */
 
-public interface OnItemLongClickListener {
-
-    boolean onItemLongClick(View itemView, ViewHolder holder);
+public interface OnItemLongClickListener<T> {
+    boolean onItemLongClick(int position,T t ,View itemView, ViewHolder holder);
+    //boolean onItemLongClick(View itemView, ViewHolder holder);
 }

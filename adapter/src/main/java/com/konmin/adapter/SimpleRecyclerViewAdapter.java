@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,9 +24,9 @@ public abstract class SimpleRecyclerViewAdapter<T> extends RecyclerView.Adapter<
 
     private List<T> mDataList;
 
-    private OnItemClickListener mOnItemClickListener;
+    private OnItemClickListener<T> mOnItemClickListener;
 
-    private OnItemLongClickListener mOnItemLongClickListener;
+    private OnItemLongClickListener<T> mOnItemLongClickListener;
 
     public SimpleRecyclerViewAdapter(int layoutId) {
 
@@ -35,22 +36,23 @@ public abstract class SimpleRecyclerViewAdapter<T> extends RecyclerView.Adapter<
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(mLayoutId, parent, false);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(mLayoutId, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickListener.onItemClick(v, viewHolder);
+                int position = viewHolder.getAdapterPosition();
+                mOnItemClickListener.onItemClick(position, mDataList.get(position), view, viewHolder);
             }
         });
 
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return mOnItemLongClickListener.onItemLongClick(v, viewHolder);
+                int position = viewHolder.getAdapterPosition();
+                return mOnItemLongClickListener.onItemLongClick(position, mDataList.get(position), view, viewHolder);
             }
         });
-
         return viewHolder;
     }
 
@@ -70,5 +72,24 @@ public abstract class SimpleRecyclerViewAdapter<T> extends RecyclerView.Adapter<
         return mDataList.size();
     }
 
+
+    public void setDataList(List<T> mDataList) {
+        this.mDataList = mDataList;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener<T> onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener<T> onItemLongClickListener) {
+        this.mOnItemLongClickListener = onItemLongClickListener;
+    }
+
+    public void addData(T t) {
+        if (mDataList == null) {
+            mDataList = new ArrayList<>();
+        }
+        mDataList.add(t);
+    }
 
 }

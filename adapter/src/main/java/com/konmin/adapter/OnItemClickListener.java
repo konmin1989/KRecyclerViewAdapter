@@ -9,7 +9,7 @@ import android.view.View;
  * @version 创建时间：2017/11/11
  */
 
-public interface OnItemClickListener {
+public interface OnItemClickListener <T> {
 
-    void onItemClick(View itemView, ViewHolder holder);
+    void onItemClick(int position,T t ,View itemView, ViewHolder holder);
 }
