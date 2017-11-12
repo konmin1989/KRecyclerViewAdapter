@@ -26,10 +26,10 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
 
 
-    /*public void setTextViewText(int id, CharSequence text) {
+    public void setTextViewText(int id, CharSequence text) {
         TextView textView = findViewById(id);
         textView.setText(text);
-    }*/
+    }
 
 
     public <T extends View> T findViewById(int id) {
