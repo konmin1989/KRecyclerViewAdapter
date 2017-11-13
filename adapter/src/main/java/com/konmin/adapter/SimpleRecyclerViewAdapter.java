@@ -38,11 +38,14 @@ public abstract class SimpleRecyclerViewAdapter<T> extends RecyclerView.Adapter<
 
         final View view = LayoutInflater.from(parent.getContext()).inflate(mLayoutId, parent, false);
         final ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.setViewType(viewType);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = viewHolder.getAdapterPosition();
-                mOnItemClickListener.onItemClick(position, mDataList.get(position), view, viewHolder);
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(position, mDataList.get(position), view, viewHolder);
+                }
             }
         });
 
@@ -50,7 +53,8 @@ public abstract class SimpleRecyclerViewAdapter<T> extends RecyclerView.Adapter<
             @Override
             public boolean onLongClick(View v) {
                 int position = viewHolder.getAdapterPosition();
-                return mOnItemLongClickListener.onItemLongClick(position, mDataList.get(position), view, viewHolder);
+                return mOnItemLongClickListener != null && mOnItemLongClickListener.onItemLongClick(position, mDataList.get
+                        (position), view, viewHolder);
             }
         });
         return viewHolder;

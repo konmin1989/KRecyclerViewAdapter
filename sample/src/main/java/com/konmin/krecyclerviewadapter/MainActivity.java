@@ -1,5 +1,6 @@
 package com.konmin.krecyclerviewadapter;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +14,6 @@ import com.konmin.krecyclerviewadapter.entity.Note;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mSimpleRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener<Note>() {
             @Override
             public void onItemClick(int position, Note note, View itemView, ViewHolder holder) {
-
+                startActivity(new Intent(MainActivity.this, MultiRecyclerViewActivity.class));
             }
         });
 
