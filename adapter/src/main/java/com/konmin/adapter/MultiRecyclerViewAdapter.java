@@ -1,6 +1,5 @@
 package com.konmin.adapter;
 
-import android.app.Application;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,7 +92,7 @@ public abstract class MultiRecyclerViewAdapter<T> extends RecyclerView.Adapter<V
     /**
      * 设置数据列表
      *
-     * @param data
+     * @param data 装的数据
      */
     public void setDataList(List<T> data) {
         mData = data;
