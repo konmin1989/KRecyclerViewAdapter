@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,4 +60,38 @@ public abstract class SimpleListViewAdapter<T> extends BaseAdapter {
 
     public abstract void bindData(ListViewHolder holder, T t, int position);
 
+
+    public void setDataList(List<T> dataList) {
+        mData = dataList;
+    }
+
+
+    public void addDataAtLast(T t) {
+
+        if (mData == null) {
+            mData = new ArrayList<>();
+        }
+
+        mData.add(t);
+    }
+
+    public void addDataAtFirst(T data) {
+
+        if (mData == null) {
+            mData = new ArrayList<>();
+        }
+        mData.add(0, data);
+    }
+
+    public void addDataAtPosition(int position, T data) {
+
+        if (mData == null) {
+            return;
+        }
+
+        if (mData.size() < position) {
+            return;
+        }
+        mData.add(0, data);
+    }
 }
