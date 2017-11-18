@@ -9,13 +9,17 @@ import android.view.View;
 public class ListViewHolder {
 
 
-
     private View mItemView;
 
     public ListViewHolder(View itemView) {
 
         mItemView = itemView;
 
+    }
+
+
+    public <T extends View> T findViewById(int id) {
+        return mItemView.findViewById(id);
     }
 
 

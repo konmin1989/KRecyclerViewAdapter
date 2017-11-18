@@ -1,5 +1,6 @@
 package com.konmin.adapter;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by konmin on 2017/11/18.
  */
 
-public class SimpleListViewAdapter<T> extends BaseAdapter {
+public abstract class SimpleListViewAdapter<T> extends BaseAdapter {
 
 
     private int mItemLayoutId;
@@ -20,9 +21,7 @@ public class SimpleListViewAdapter<T> extends BaseAdapter {
 
 
     public SimpleListViewAdapter(int itemLayoutId) {
-
         mItemLayoutId = itemLayoutId;
-
     }
 
 
@@ -45,9 +44,19 @@ public class SimpleListViewAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+
+        ListViewHolder holder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(parent.getContext()).inflate(mItemLayoutId, parent, false);
+            holder = new ListViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (ListViewHolder) convertView.getTag();
+        }
+        bindData(holder, mData.get(position), position);
+        return convertView;
     }
 
-
+    public abstract void bindData(ListViewHolder holder, T t, int position);
 
 }
